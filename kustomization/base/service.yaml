@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-dekorate-demo-service
+spec:
+  type: ClusterIP
+  selector:
+    app: spring-boot-dekorate-demo
+  ports:
+  - port: 3000
+    targetPort: 8080

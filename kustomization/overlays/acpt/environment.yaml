@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-dekorate-demo-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name:  spring-boot-dekorate-demo
+          env:
+            - name: APP_GREETING
+              value: from acpt environment
