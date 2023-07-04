@@ -9,7 +9,7 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      IMAGE_TAG: "${{ github.ref == 'refs/heads/main' && ${GITHUB_SHA::8} || $GITHUB_REF_NAME }}"
+      IMAGE_TAG: "${{ github.ref == 'refs/heads/main' && '${GITHUB_SHA::8}' || $GITHUB_REF_NAME }}"
 
     steps:
       - uses: actions/checkout@v3
