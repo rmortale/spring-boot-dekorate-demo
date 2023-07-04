@@ -40,4 +40,4 @@ jobs:
 
       # Build and deploy to EKS cluster
       - name: Build and then deploy to EKS cluster with Skaffold
-        run: skaffold build --profile acptProfile
+        run: skaffold build --profile acptProfile --default-repo $SKAFFOLD_DEFAULT_REPO
