@@ -28,3 +28,6 @@ jobs:
           path: ~/.skaffold/
           key: fixed-${{ github.sha }}
 
+      # Build and deploy to EKS cluster
+      - name: Build and then deploy to EKS cluster with Skaffold
+        run: skaffold build --profile acptProfile
