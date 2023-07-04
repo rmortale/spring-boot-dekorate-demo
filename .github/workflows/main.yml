@@ -30,5 +30,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven and push
-        run: mvn clean package com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME:${GITHUB_SHA::8}
+      - name: Test
+        run: mvn -B clean test
+
+      - name: Build and push
+        #run: mvn clean package com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME:${GITHUB_SHA::8}
+        run: mvn package -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=$REGISTRY/$IMAGE_NAME:${GITHUB_SHA::8} -Dspring-boot.build-image.publish=true
