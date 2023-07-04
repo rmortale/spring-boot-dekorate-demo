@@ -6,21 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      #IMAGE_TAG: "${{ github.ref == 'refs/heads/main' && \"${GITHUB_SHA::8}\" || \"$GITHUB_REF_NAME\" }}"
-      #IMAGE_TAG: ${{ github.ref.name }}
 
     steps:
       - uses: actions/checkout@v3
-
-#      - name: Log in to the Container registry
-#        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -33,14 +23,12 @@ jobs:
         run: mvn -B clean test
 
       - name: Build and push
-        #run: mvn clean package com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME:${GITHUB_SHA::8}
         run: |
           if [[ $GITHUB_REF == "refs/heads/main" ]]; then
             export IMAGE_TAG=${GITHUB_SHA::8}
           else
             export IMAGE_TAG=$GITHUB_REF_NAME
           fi
-          env
           mvn -B package -DskipTests spring-boot:build-image \
             -Dspring-boot.build-image.imageName=$REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
             -Dspring-boot.build-image.publish=true \
