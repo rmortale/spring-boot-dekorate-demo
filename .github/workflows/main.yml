@@ -12,7 +12,6 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      SKAFFOLD_DEFAULT_REPO: ghcr.io/rmortale
 
     steps:
       - uses: actions/checkout@v3
@@ -24,20 +23,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Install Skaffold
-      - name: Install Skaffold
-        run: |
-          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
-          sudo install skaffold /usr/local/bin/
-          skaffold version
-
-      # Cache skaffold image builds & config
-      - name: Cache skaffold image builds & config
-        uses: actions/cache@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          path: ~/.skaffold/
-          key: fixed-${{ github.sha }}
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-      # Build and deploy to EKS cluster
-      - name: Build and then deploy to EKS cluster with Skaffold
-        run: skaffold build --profile acptProfile --default-repo $SKAFFOLD_DEFAULT_REPO
+      - name: Build with Maven and push
+        run: mvn com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME
