@@ -12,7 +12,7 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      SKAFFOLD_DEFAULT_REPO: $REGISTRY/$IMAGE_NAME
+      SKAFFOLD_DEFAULT_REPO: ghcr.io
 
     steps:
       - uses: actions/checkout@v3
