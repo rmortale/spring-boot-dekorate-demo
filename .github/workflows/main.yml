@@ -31,4 +31,4 @@ jobs:
           cache: maven
 
       - name: Build with Maven and push
-        run: mvn clean package com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME
+        run: mvn clean package com.google.cloud.tools:jib-maven-plugin:build -Dimage=$REGISTRY/$IMAGE_NAME:${GITHUB_SHA::8}
