@@ -11,5 +11,3 @@ spec:
           env:
             - name: APP_GREETING
               value: from dev environment
-            - name: JAVA_TOOL_OPTIONS
-              value: -XX:MaxMetaspaceSize=32M -XX:ReservedCodeCacheSize=32M -Xss136K
