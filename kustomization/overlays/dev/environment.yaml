@@ -11,3 +11,5 @@ spec:
           env:
             - name: APP_GREETING
               value: from dev environment
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:ReservedCodeCacheSize=64M
