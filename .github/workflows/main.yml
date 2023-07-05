@@ -39,5 +39,5 @@ jobs:
           else
             export IMAGE_TAG=`echo $GITHUB_REF_NAME|sed 's#/#-#g'`
           fi
-          mvn -B package com.google.cloud.tools:jib-maven-plugin:build \
+          mvn -B package -DskipTests com.google.cloud.tools:jib-maven-plugin:build \
             -Dimage=$REGISTRY/$IMAGE_NAME:$IMAGE_TAG
