@@ -14,12 +14,5 @@ spec:
       containers:
       - name: spring-boot-dekorate-demo
         image: spring-boot-dekorate-demo
-        resources:
-          requests:
-            memory: "32Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
