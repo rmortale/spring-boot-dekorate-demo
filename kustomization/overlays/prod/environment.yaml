@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name:  spring-boot-dekorate-demo
-          image: ghcr.io/rmortale/spring-boot-dekorate-demo:48cea423
+          image: ghcr.io/rmortale/spring-boot-dekorate-demo:2deec5fa
           env:
             - name: APP_GREETING
               value: from PROD environment
